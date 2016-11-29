@@ -7,7 +7,7 @@
   "source": "git://github.com/puppetlabs/puppet-postgresql.git",
   "project_page": "https://github.com/puppetlabs/puppet-postgresql",
   "issues_url": "https://github.com/puppetlabs/puppet-postgresql/issues",
-  "tags": ["things", "stuff"],
+  "tags": [42],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",

@@ -95,6 +95,8 @@ module MetadataJsonLint
       error_state = true if options[:strict_license]
     end
 
+    error_state = tag_errors?(parsed['tags']) unless parsed['tags'].nil?
+
     return unless error_state
     if options[:fail_on_warnings] == true
       abort("Errors found in #{metadata}")
@@ -135,4 +137,18 @@ module MetadataJsonLint
     SemanticPuppet::VersionRange.parse(module_end).end == SemanticPuppet::Version::MAX
   end
   module_function :open_ended?
+
+  def tag_errors?(tags)
+    # Tags must be an array of strings
+    if !tags.is_a?(Array) || tags.any? { |tag| !tag.is_a?(String) }
+      puts 'Error: tags must be an array of strings'
+      true
+    elsif tags.any? { |tag| tag =~ /\s/ }
+      puts 'Error: tags must not contain any whitespace'
+      true
+    else
+      false
+    end
+  end
+  module_function :tag_errors?
 end
